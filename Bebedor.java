@@ -32,16 +32,51 @@ public class Bebedor
      */
     public void darBebida(Cubata bebida)
     {
-        if (nivelSangre < limite)
-        {
-            int nivelBebida = bebida.saberCantidad();
+        int nivelBebida = bebida.saberCantidad();
+        if ((nivelSangre + nivelBebida) < limite)
+        {            
             nivelSangre = nivelSangre + nivelBebida;            
         }
         else
         {
-            sobrepasaLimite = true;
             System.out.println("No puedo beber más");
+            sobrepasaLimite = true;            
         } 
+    }
+    
+    /**
+     * Devuelve el nivel de alcohol en sangre del bebedor.
+     */
+    public int medirNivel()
+    {
+        return nivelSangre;
+    }
+    
+    /**
+     * Permite hacer una pregunta al bebedor, a la cual respondera con un Si o No dependiendo de la paridad del numero de letras de 
+     * la pregunta en caso de que no sobrepase el limite de alcohol, y en caso contrario repetira la pregunta que se le hizo pero gritando.
+     */
+    public void preguntar(String pregunta)
+    {
+        if ((sobrepasaLimite == true) || (pregunta.contains(nombre)))        
+        {
+            System.out.println(pregunta.toUpperCase());
+        }
+        else
+        {
+            int numeroLetras = pregunta.length();
+            int paridad = (numeroLetras % 2);
+            
+            if (paridad == 0)
+            {
+                System.out.println("Si");                
+            }            
+            else
+            {
+                System.out.println("No");  
+            }
+            
+        }
     }
     
 }
