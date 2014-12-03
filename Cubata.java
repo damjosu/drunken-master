@@ -18,4 +18,12 @@ public class Cubata
         this.cantidad = cantidad;
     }
    
+    /**
+     * Te devuelve la cantidad de alcohol de la bebida.
+     */
+    public int saberCantidad()
+    {
+        return cantidad;
+    }
+    
 }
