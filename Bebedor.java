@@ -26,4 +26,22 @@ public class Bebedor
         sobrepasaLimite = false;
         pregunta = null;
     }
+    
+    /**
+     * Da una bebida de un tipo específico al bebedor, en caso de que no pueda beber más te lo dirá.
+     */
+    public void darBebida(Cubata bebida)
+    {
+        if (nivelSangre < limite)
+        {
+            int nivelBebida = bebida.saberCantidad();
+            nivelSangre = nivelSangre + nivelBebida;            
+        }
+        else
+        {
+            sobrepasaLimite = true;
+            System.out.println("No puedo beber más");
+        } 
+    }
+    
 }
