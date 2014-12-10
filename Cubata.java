@@ -7,12 +7,12 @@ public class Cubata
     //Tipo de bebida.
     private String bebida;
     //Cantidad de alcohol de la bebida.
-    private int cantidad;
+    private float cantidad;
 
     /**
      * Crea una bebida de un tipo específico y con un nivel de alcohol específico.
      */
-    public Cubata(String bebida, int cantidad)
+    public Cubata(String bebida, float cantidad)
     {
         this.bebida = bebida;
         this.cantidad = cantidad;
@@ -21,7 +21,7 @@ public class Cubata
     /**
      * Te devuelve la cantidad de alcohol de la bebida.
      */
-    public int saberCantidad()
+    public float saberCantidad()
     {
         return cantidad;
     }

@@ -6,40 +6,52 @@
 public class Bebedor
 {
     //Nivel de alcohol en sangre.
-    private int nivelSangre;
+    private float nivelSangre;
     //Limite de alcohol.
-    private int limite;
+    private float limite;
     //Nombre del bebedor.
     private String nombre;
     //Si ha sobrepasado el limite de alcohol o no.
     private Boolean sobrepasaLimite;
     //Pregunta que haces al bebedor
     private String pregunta;
+    //Hora a la que se toma una copa
+    private int hora;
+    //Minutos a los que se toma una copa
+    private int minutos;
+    //Tiempo
+    private String tiempo;
+   
     
     /**
      * Crea un bebedor con su nombre y limite máximo de alcohol permitido.
      */
-    public Bebedor(String nombre, int limite)
+    public Bebedor(String nombre, float limite)
     {
         this.nombre = nombre;
         this.limite = limite;
         sobrepasaLimite = false;
         pregunta = null;
+        hora = 0;
+        minutos = 0;
     }
     
     /**
      * Da una bebida de un tipo específico al bebedor, en caso de que no pueda beber más te lo dirá.
      */
-    public void darBebida(Cubata bebida)
+    public void darBebida(Cubata bebida, int hora, int minutos)
     {
-        int nivelBebida = bebida.saberCantidad();
-        if ((nivelSangre + nivelBebida) < limite)
+        float nivelBebida = bebida.saberCantidad();
+        if ((nivelSangre) < limite)
         {            
-            nivelSangre = nivelSangre + nivelBebida;            
+            nivelSangre = nivelSangre + nivelBebida;  
+            this.hora = hora;
+            this.minutos = minutos;
+            actualizarTiempo();
         }
         else
         {
-            System.out.println("No puedo beber más");
+            System.out.println("No puedo beber mas");
             sobrepasaLimite = true;            
         } 
     }
@@ -47,7 +59,7 @@ public class Bebedor
     /**
      * Devuelve el nivel de alcohol en sangre del bebedor.
      */
-    public int medirNivel()
+    public float medirNivel()
     {
         return nivelSangre;
     }
@@ -79,4 +91,70 @@ public class Bebedor
         }
     }
     
+    /**
+     * Te dice si el tiempo introducido es correcto o no.
+     */
+    private boolean actualizarTiempo()
+    {
+        boolean valido = false;
+        if (hora < 24 && minutos < 60 && hora >= 0 && minutos >= 0)
+        {
+            this.hora = hora;
+            this.minutos = minutos;
+            valido = true;
+        }
+        
+        else
+        {
+            System.out.println("la hora introducida no es correcta");
+        }
+        return valido;
+    }
+    
+    /**
+     * Te devuelve la hora actual.
+     */
+    public void getTiempo()    
+    {
+        if (actualizarTiempo())
+        {
+            tiempo = hora + ":" + minutos;
+            System.out.println(tiempo);
+        }
+        else
+        
+            if (medirNivel() > 0) 
+            {
+                System.out.println("Hora introducida incorrecta");
+            }
+            
+            else
+            {
+                System.out.println("Aun no ha bebido nada");
+            }
+        
+    }
+    
+    /**
+     * Avanza una hora reduciendo el nivel en sangre hasta que est� sobrio.
+     */
+    public void avanzarUnaHora()
+    {
+        nivelSangre = (nivelSangre - 0.5f);
+        if (nivelSangre < 0)
+        {
+            System.out.println("Ya est� sobrio");
+        }
+        
+        if ((hora + 1) ==  24)
+        {
+            hora = 0;
+        }
+        else
+        {
+            hora = (hora + 1);
+        }
+                
+    }
+        
 }
